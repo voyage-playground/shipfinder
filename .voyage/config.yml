@@ -1,0 +1,17 @@
+services:
+  app:
+    build: ./
+    primary: true
+    exposePort: 3000
+    environment:
+      - name: APP_ENV
+        value: 'voyage'
+  database:
+    image: postgres:13
+    environment:
+      - name: POSTGRES_USER
+        value: 'voyage'
+      - name: POSTGRES_PASSWORD
+        value: 'voyage'
+      - name: POSTGRES_DB
+        value: 'voyage'

@@ -1,0 +1,26 @@
+version: '3.6'
+services:
+  api:
+    build: ./
+    ports:
+      - '8000:3000'
+      - '9229:9229'
+    env_file:
+      - ./.env
+    volumes:
+      - ./public:/app/public
+      - ./server:/app/server
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: voyage
+      POSTGRES_PASSWORD: voyage
+      POSTGRES_DB: voyage
+    volumes:
+      - dbData:/var/lib/postgresql/data
+    ports:
+      - '54320:5432'
+
+volumes:
+  dbData:
