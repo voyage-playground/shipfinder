@@ -22,15 +22,15 @@ const pulse = () => keyframes`
 `;
 
 const MarkerContainer = styled.div`
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
   background: white url(${shipImage}) no-repeat center/80%;
   box-shadow: 0px 0px 16px #217594;
   animation: ${pulse()} 1.5s infinite;
 `;
 
-const ShipMap = () => (
+const ShipMap = ({ ships }) => (
   <Map
     zoom={[3]}
     center={[-46.24566763831464, 34.74741002334936]}
@@ -40,12 +40,11 @@ const ShipMap = () => (
       width: '100vw',
     }}
   >
-    <Marker
-      coordinates={[-46.24566763831464, 34.74741002334936]}
-      anchor="bottom"
-    >
-      <MarkerContainer />
-    </Marker>
+    {ships.map(ship => (
+      <Marker key={ship.id} coordinates={[ship.lng, ship.lat]} anchor="bottom">
+        <MarkerContainer />
+      </Marker>
+    ))}
   </Map>
 );
 

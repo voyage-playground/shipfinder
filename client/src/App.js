@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffectOnce } from 'react-use';
 import { Flex, Provider } from '@actovos-consulting-group/ui-core';
 import styledNormalize from 'styled-normalize';
 import { createGlobalStyle, css } from 'styled-components';
 import Map from './components/map';
 import Sidebar from './components/sidebar';
+import axios from './utils/axios';
 
 const GlobalStyle = createGlobalStyle(
   ({ theme }) => css`
@@ -19,15 +21,9 @@ const GlobalStyle = createGlobalStyle(
     body {
       font-family: 'Maven Pro', sans-serif !important;
       height: 100%;
-      background: ${theme.colors.base};
-      color: ${theme.colors.textColor} !important;
     }
     * {
       box-sizing: border-box;
-    }
-
-    a {
-      color: ${theme.colors.whiteSmoke};
     }
 
     h1 {
@@ -51,16 +47,27 @@ const GlobalStyle = createGlobalStyle(
   `,
 );
 
-function App() {
+const App = () => {
+  const [allShips, setShips] = useState([]);
+
+  const fetchShipData = async () => {
+    const { data } = await axios.get('/ships');
+    setShips(data);
+  };
+
+  useEffectOnce(() => {
+    fetchShipData();
+  });
+
   return (
     <Provider>
       <GlobalStyle />
       <Flex height="100%" flex={1}>
-        <Sidebar />
-        <Map />
+        <Sidebar ships={allShips} />
+        <Map ships={allShips} />
       </Flex>
     </Provider>
   );
-}
+};
 
 export default App;

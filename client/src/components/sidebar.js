@@ -22,20 +22,23 @@ const Logo = styled.img`
   display: block;
 `;
 
-const ShipItem = () => {
+const ShipItem = ({ name, captain }) => {
   return (
     <Card>
-      <Text>The voyager</Text>
+      <Text>{name}</Text>
+      <Text>{captain}</Text>
     </Card>
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ ships }) => {
   return (
     <Container>
       <Logo src="/logo.png" />
       <p>Ships en route</p>
-      <ShipItem />
+      {ships.map(ship => (
+        <ShipItem key={ship.id} {...ship} />
+      ))}
     </Container>
   );
 };
