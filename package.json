@@ -1,0 +1,23 @@
+{
+  "name": "shipfinder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voyage-playground/shipfinder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voyage-playground/shipfinder/issues"
+  },
+  "homepage": "https://github.com/voyage-playground/shipfinder#readme",
+  "devDependencies": {
+    "@actovos-consulting-group/eslint-config-acg": "^1.2.0",
+    "@actovos-consulting-group/prettier-config": "^1.0.2",
+    "eslint": "^7.18.0",
+    "prettier": "^2.2.1"
+  }
+}
