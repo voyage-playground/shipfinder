@@ -6,6 +6,10 @@ services:
     environment:
       - name: APP_ENV
         value: 'voyage'
+      - name: NODE_ENV
+        value: 'production'
+      - name: DB_HOST
+        value: 127.0.0.1
   database:
     image: postgres:13
     environment:
