@@ -14,7 +14,7 @@ const Container = styled(Block)`
   height: 90vh;
   z-index: 1;
   width: 400px;
-  box-shadow: 0px 0px 16px #217594;
+  box-shadow: 0px 0px 76px #217594;
 `;
 
 const Logo = styled.img`

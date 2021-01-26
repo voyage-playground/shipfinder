@@ -18,12 +18,20 @@ const pulse = () => keyframes`
 `;
 
 const MarkerContainer = styled(Flex)`
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   background-color: #0080ff;
   box-shadow: 0px 0px 16px #217594;
   animation: ${pulse()} 1.5s infinite;
+  transition: all ease 0.5s;
+  transform-origin: center center;
+  cursor: pointer;
+
+  &:hover {
+    height: 100px;
+    width: 100px;
+  }
 `;
 
 const ShipMarker = () => {

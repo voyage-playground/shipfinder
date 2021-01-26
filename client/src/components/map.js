@@ -10,7 +10,7 @@ const ShipMap = ({ ships }) => (
   <Map
     zoom={[3]}
     center={[-46.24566763831464, 34.74741002334936]}
-    style="mapbox://styles/mapbox/streets-v9"
+    style="mapbox://styles/jadenlemmon/ckkemiib9132217p6jt5j5x1c"
     containerStyle={{
       height: '100vh',
       width: '100vw',
