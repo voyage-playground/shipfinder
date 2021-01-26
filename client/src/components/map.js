@@ -1,6 +1,4 @@
-// ES6
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import shipImage from '../ship.svg';
 import styled, { keyframes } from 'styled-components';
 
