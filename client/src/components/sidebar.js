@@ -24,9 +24,13 @@ const Logo = styled.img`
 
 const ShipItem = ({ name, captain }) => {
   return (
-    <Card>
-      <Text>{name}</Text>
-      <Text>{captain}</Text>
+    <Card mb={20}>
+      <div>
+        <Text fontSize="1.2rem">{name}</Text>
+      </div>
+      <div>
+        <Text>Captain: {captain}</Text>
+      </div>
     </Card>
   );
 };

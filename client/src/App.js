@@ -8,7 +8,7 @@ import Sidebar from './components/sidebar';
 import axios from './utils/axios';
 
 const GlobalStyle = createGlobalStyle(
-  ({ theme }) => css`
+  () => css`
     ${styledNormalize}
 
     div#root {
@@ -19,7 +19,9 @@ const GlobalStyle = createGlobalStyle(
 
     html,
     body {
-      font-family: 'Maven Pro', sans-serif !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
       height: 100%;
     }
     * {
