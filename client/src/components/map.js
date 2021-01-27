@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
-import ShipMarker from './ship-marker';
 import { useGlobalState } from '../state';
+import ShipMarker from './ship-marker';
 
 const ShipMap = () => {
   const [state] = useGlobalState();
@@ -18,7 +18,7 @@ const ShipMap = () => {
       mapStyle="mapbox://styles/jadenlemmon/ckkemiib9132217p6jt5j5x1c"
       width="100vw"
       height="100vh"
-      onViewportChange={viewport => setViewport(viewport)}
+      onViewportChange={vi => setViewport(vi)}
       {...viewport}
     >
       {state.activeShips.map(ship => (

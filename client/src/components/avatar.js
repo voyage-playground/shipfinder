@@ -10,6 +10,7 @@ const StyledImg = styled.img`
   `}
 `;
 
+// eslint-disable-next-line no-undef
 const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
 
 const Avatar = ({ src, size }) => {
@@ -19,11 +20,9 @@ const Avatar = ({ src, size }) => {
 Avatar.propTypes = {
   size: PropTypes.number,
   src: PropTypes.string,
-  defaultColor: PropTypes.string,
 };
 
 Avatar.defaultProps = {
-  defaultColor: '',
   src: '',
   size: 50,
 };

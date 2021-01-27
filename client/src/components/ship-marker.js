@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Marker } from 'react-map-gl';
 import { Clickable } from '@actovos-consulting-group/ui-core';
 import styled, { keyframes, css } from 'styled-components';
-import ShipIcon from './svg/ship';
 import { useGlobalState } from '../state';
+import ShipIcon from './svg/ship';
 
 const pulse = () => keyframes`
     0% {

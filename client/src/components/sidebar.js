@@ -13,8 +13,8 @@ import {
   ModalHeader,
 } from '@actovos-consulting-group/ui-core';
 import styled from 'styled-components';
-import Avatar from './avatar';
 import { useGlobalState } from '../state';
+import Avatar from './avatar';
 
 const Container = styled(Block)`
   background-color: white;
