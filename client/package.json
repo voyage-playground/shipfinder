@@ -18,6 +18,7 @@
     "worker-loader": "^3.0.7"
   },
   "scripts": {
+    "prettier": "prettier --check '**/*.{js,jsx,ts,tsx,md}'",
     "lint": "eslint --ext '.js' .",
     "start": "REACT_APP_API_URL=http://localhost:8000 react-scripts start",
     "build": "react-scripts build",

@@ -5,6 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --check '**/*.{js,jsx,ts,tsx,md}'",
+    "lint": "eslint --ext '.js' .",
     "start": "nodemon -L --inspect=0.0.0.0 server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
