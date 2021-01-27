@@ -21,7 +21,9 @@ app.get('/ships', async (_, res) => {
 
 app.put('/ships/:id', async (req, res) => {
   const shipID = req.params.id;
-  await knex('ships').where({ id: shipID }).update(req.body);
+  await knex('ships')
+    .where({ id: shipID })
+    .update(req.body);
   res.sendStatus(200);
 });
 
@@ -33,14 +35,20 @@ app.post('/ships', async (_, res) => {
     lng: -46.24566763831464,
     avatar: Math.floor(Math.random() * 8) + 1,
   };
-  const [shipID] = await knex('ships').insert(newShipPayload).returning('id');
-  const ship = await knex('ships').where({ id: shipID }).first();
+  const [shipID] = await knex('ships')
+    .insert(newShipPayload)
+    .returning('id');
+  const ship = await knex('ships')
+    .where({ id: shipID })
+    .first();
   res.json(ship);
 });
 
 app.delete('/ships/:id', async (req, res) => {
   const shipID = req.params.id;
-  await knex('ships').where({ id: shipID }).delete();
+  await knex('ships')
+    .where({ id: shipID })
+    .delete();
   res.sendStatus(200);
 });
 
