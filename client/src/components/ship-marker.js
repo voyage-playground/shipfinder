@@ -3,6 +3,7 @@ import { Marker } from 'react-map-gl';
 import { Flex } from '@actovos-consulting-group/ui-core';
 import styled, { keyframes } from 'styled-components';
 import ShipIcon from './svg/ship';
+import { useGlobalState } from '../state';
 
 const pulse = () => keyframes`
     0% {
@@ -35,13 +36,14 @@ const MarkerContainer = styled(Flex)`
   }
 `;
 
-const ShipMarker = ({ id, lat, lng, updateShipData }) => {
+const ShipMarker = ({ id, lat, lng }) => {
   const [coords, setCoords] = useState({ lat, lng });
+  const [, { updateShip }] = useGlobalState();
 
   const onDragEnd = (event, shipID) => {
     const newCoords = { lng: event.lngLat[0], lat: event.lngLat[1] };
     setCoords(newCoords);
-    updateShipData({
+    updateShip({
       id: shipID,
       ...newCoords,
     });

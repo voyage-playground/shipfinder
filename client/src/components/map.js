@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import ShipMarker from './ship-marker';
+import { useGlobalState } from '../state';
 
-const ShipMap = ({ ships, updateShipData }) => {
+const ShipMap = () => {
+  const [state] = useGlobalState();
+
   const [viewport, setViewport] = useState({
     latitude: 34.74741002334936,
     longitude: -46.24566763831464,
@@ -18,8 +21,8 @@ const ShipMap = ({ ships, updateShipData }) => {
       onViewportChange={viewport => setViewport(viewport)}
       {...viewport}
     >
-      {ships.map(ship => (
-        <ShipMarker key={ship.id} updateShipData={updateShipData} {...ship} />
+      {state.activeShips.map(ship => (
+        <ShipMarker key={ship.id} {...ship} />
       ))}
     </ReactMapGL>
   );

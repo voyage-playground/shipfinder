@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffectOnce } from 'react-use';
 import { Flex, Provider } from '@actovos-consulting-group/ui-core';
 import styledNormalize from 'styled-normalize';
 import { createGlobalStyle, css } from 'styled-components';
 import Map from './components/map';
 import Sidebar from './components/sidebar';
-import axios from './utils/axios';
 import theme from './theme';
+import { StateProvider, useGlobalState } from './state';
 
 const GlobalStyle = createGlobalStyle(
   () => css`
@@ -50,38 +50,29 @@ const GlobalStyle = createGlobalStyle(
   `,
 );
 
-const App = () => {
-  const [allShips, setShips] = useState([]);
-
-  const fetchShipData = async () => {
-    const { data } = await axios.get('/ships');
-    setShips(data);
-  };
-
-  const updateShipData = async ship => {
-    setShips(
-      allShips.map(shi => (shi.id === ship.id ? { ...shi, ...ship } : shi)),
-    );
-    await axios.put(`/ships/${ship.id}`, ship);
-  };
-
-  const removeShip = async shipID => {
-    setShips(allShips.filter(shi => shi.id !== shipID));
-    await axios.delete(`/ships/${shipID}`);
-  };
+const InnerApp = () => {
+  const [, { fetchShips }] = useGlobalState();
 
   useEffectOnce(() => {
-    fetchShipData();
+    fetchShips();
   });
 
   return (
-    <Provider theme={theme}>
-      <GlobalStyle />
-      <Flex height="100%" flex={1}>
-        <Sidebar ships={allShips} removeShip={removeShip} />
-        <Map updateShipData={updateShipData} ships={allShips} />
-      </Flex>
-    </Provider>
+    <Flex height="100%" flex={1}>
+      <Sidebar />
+      <Map />
+    </Flex>
+  );
+};
+
+const App = () => {
+  return (
+    <StateProvider>
+      <Provider theme={theme}>
+        <GlobalStyle />
+        <InnerApp />
+      </Provider>
+    </StateProvider>
   );
 };
 

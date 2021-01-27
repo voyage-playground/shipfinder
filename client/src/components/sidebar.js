@@ -14,6 +14,7 @@ import {
 } from '@actovos-consulting-group/ui-core';
 import styled from 'styled-components';
 import Avatar from './avatar';
+import { useGlobalState } from '../state';
 
 const Container = styled(Block)`
   background-color: white;
@@ -48,8 +49,9 @@ const DeleteIcon = styled(Clickable)`
 
 const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
 
-const ShipItem = ({ id, name, captain, avatar, removeShip }) => {
+const ShipItem = ({ id, name, captain, avatar }) => {
   const [isModalOpen, toggleModal] = useToggle(false);
+  const [, { removeShip }] = useGlobalState();
 
   return (
     <ItemContainer mb={20}>
@@ -92,6 +94,7 @@ const ShipItem = ({ id, name, captain, avatar, removeShip }) => {
 };
 
 const Sidebar = ({ ships, removeShip }) => {
+  const [state] = useGlobalState();
   return (
     <Container>
       <Logo src="/logo.png" />
@@ -99,8 +102,8 @@ const Sidebar = ({ ships, removeShip }) => {
         New Ship Route
       </Button>
       <p>Ships en route</p>
-      {ships.map(ship => (
-        <ShipItem removeShip={removeShip} key={ship.id} {...ship} />
+      {state.activeShips.map(ship => (
+        <ShipItem key={ship.id} {...ship} />
       ))}
     </Container>
   );
