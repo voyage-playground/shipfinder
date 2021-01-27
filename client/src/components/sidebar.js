@@ -1,4 +1,5 @@
 import React from 'react';
+import { useToggle } from 'react-use';
 import { AiFillDelete } from 'react-icons/ai';
 import {
   Block,
@@ -7,6 +8,9 @@ import {
   Button,
   Flex,
   Clickable,
+  Modal,
+  ModalContent,
+  ModalHeader,
 } from '@actovos-consulting-group/ui-core';
 import styled from 'styled-components';
 import Avatar from './avatar';
@@ -44,7 +48,9 @@ const DeleteIcon = styled(Clickable)`
 
 const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
 
-const ShipItem = ({ name, captain, avatar }) => {
+const ShipItem = ({ id, name, captain, avatar, removeShip }) => {
+  const [isModalOpen, toggleModal] = useToggle(false);
+
   return (
     <ItemContainer mb={20}>
       <Flex>
@@ -60,14 +66,32 @@ const ShipItem = ({ name, captain, avatar }) => {
           </div>
         </Block>
       </Flex>
-      <DeleteIcon onClick={() => null}>
+      <DeleteIcon onClick={toggleModal}>
         <AiFillDelete color="#ccc" />
       </DeleteIcon>
+      <Modal show={isModalOpen}>
+        <ModalHeader>Remove Ship?</ModalHeader>
+        <ModalContent>
+          <Button.Group>
+            <Button
+              variant="success"
+              onClick={() => {
+                removeShip(id);
+              }}
+            >
+              Yes
+            </Button>
+            <Button variant="danger" onClick={toggleModal}>
+              No
+            </Button>
+          </Button.Group>
+        </ModalContent>
+      </Modal>
     </ItemContainer>
   );
 };
 
-const Sidebar = ({ ships }) => {
+const Sidebar = ({ ships, removeShip }) => {
   return (
     <Container>
       <Logo src="/logo.png" />
@@ -76,7 +100,7 @@ const Sidebar = ({ ships }) => {
       </Button>
       <p>Ships en route</p>
       {ships.map(ship => (
-        <ShipItem key={ship.id} {...ship} />
+        <ShipItem removeShip={removeShip} key={ship.id} {...ship} />
       ))}
     </Container>
   );

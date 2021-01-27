@@ -65,6 +65,11 @@ const App = () => {
     await axios.put(`/ships/${ship.id}`, ship);
   };
 
+  const removeShip = async shipID => {
+    setShips(allShips.filter(shi => shi.id !== shipID));
+    await axios.delete(`/ships/${shipID}`);
+  };
+
   useEffectOnce(() => {
     fetchShipData();
   });
@@ -73,7 +78,7 @@ const App = () => {
     <Provider theme={theme}>
       <GlobalStyle />
       <Flex height="100%" flex={1}>
-        <Sidebar ships={allShips} />
+        <Sidebar ships={allShips} removeShip={removeShip} />
         <Map updateShipData={updateShipData} ships={allShips} />
       </Flex>
     </Provider>

@@ -24,6 +24,12 @@ app.put('/ships/:id', async (req, res) => {
   res.sendStatus(200);
 });
 
+app.delete('/ships/:id', async (req, res) => {
+  const shipID = req.params.id;
+  await knex('ships').where({ id: shipID }).delete();
+  res.sendStatus(200);
+});
+
 app.use(express.static(path.join(__dirname, 'static')));
 
 if (process.env.NODE_ENV === 'production') {
