@@ -32,9 +32,9 @@ const MarkerContainer = styled(Clickable)`
     cursor: pointer;
 
     ${p.$selected &&
-    `
-      box-shadow: 0px 0px 16px #fff;
-      border: 4px solid #fff;
+      `
+        box-shadow: 0px 0px 16px #fff;
+        border: 4px solid #fff;
     `}
 
     &:hover {
