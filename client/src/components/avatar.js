@@ -9,8 +9,11 @@ const StyledImg = styled.img`
     height: ${size}px;
   `}
 `;
+
+const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
+
 const Avatar = ({ src, size }) => {
-  return <StyledImg src={src} size={size} />;
+  return <StyledImg src={`${urlPrefix}/avatars/${src}.svg`} size={size} />;
 };
 
 Avatar.propTypes = {

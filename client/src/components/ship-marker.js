@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Marker } from 'react-map-gl';
-import { Flex } from '@actovos-consulting-group/ui-core';
-import styled, { keyframes } from 'styled-components';
+import { Clickable } from '@actovos-consulting-group/ui-core';
+import styled, { keyframes, css } from 'styled-components';
 import ShipIcon from './svg/ship';
 import { useGlobalState } from '../state';
 
@@ -19,26 +19,34 @@ const pulse = () => keyframes`
     }
 `;
 
-const MarkerContainer = styled(Flex)`
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  background-color: #0080ff;
-  box-shadow: 0px 0px 16px #217594;
-  animation: ${pulse()} 1.5s infinite;
-  transition: all ease 0.5s;
-  transform-origin: center center;
-  cursor: pointer;
+const MarkerContainer = styled(Clickable)`
+  ${p => css`
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #0080ff;
+    box-shadow: 0px 0px 16px #217594;
+    animation: ${pulse()} 1.5s infinite;
+    transition: all ease 0.1s;
+    transform-origin: center center;
+    cursor: pointer;
 
-  &:hover {
-    height: 100px;
-    width: 100px;
-  }
+    ${p.$selected &&
+    `
+      box-shadow: 0px 0px 16px #fff;
+      border: 4px solid #fff;
+    `}
+
+    &:hover {
+      box-shadow: 0px 0px 16px #fff;
+      border: 4px solid #fff;
+    }
+  `}
 `;
 
 const ShipMarker = ({ id, lat, lng }) => {
   const [coords, setCoords] = useState({ lat, lng });
-  const [, { updateShip }] = useGlobalState();
+  const [{ selectedShip }, { updateShip, selectShip }] = useGlobalState();
 
   const onDragEnd = (event, shipID) => {
     const newCoords = { lng: event.lngLat[0], lat: event.lngLat[1] };
@@ -59,7 +67,12 @@ const ShipMarker = ({ id, lat, lng }) => {
         onDragEnd(event, id);
       }}
     >
-      <MarkerContainer alignItems="center" justifyContent="center">
+      <MarkerContainer
+        $selected={selectedShip && selectedShip.id === id}
+        onClick={() => {
+          selectShip(id);
+        }}
+      >
         <ShipIcon width={40} color="white" />
       </MarkerContainer>
     </Marker>

@@ -7,6 +7,7 @@ import Map from './components/map';
 import Sidebar from './components/sidebar';
 import theme from './theme';
 import { StateProvider, useGlobalState } from './state';
+import SelectedShip from './components/selected-ship';
 
 const GlobalStyle = createGlobalStyle(
   () => css`
@@ -51,7 +52,7 @@ const GlobalStyle = createGlobalStyle(
 );
 
 const InnerApp = () => {
-  const [, { fetchShips }] = useGlobalState();
+  const [{ selectedShip }, { fetchShips }] = useGlobalState();
 
   useEffectOnce(() => {
     fetchShips();
@@ -59,6 +60,7 @@ const InnerApp = () => {
 
   return (
     <Flex height="100%" flex={1}>
+      {selectedShip && <SelectedShip />}
       <Sidebar />
       <Map />
     </Flex>

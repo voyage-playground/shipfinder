@@ -1,5 +1,5 @@
 import React from 'react';
-import { useToggle } from 'react-use';
+import { useToggle, useAsyncFn } from 'react-use';
 import { AiFillDelete } from 'react-icons/ai';
 import {
   Block,
@@ -33,6 +33,7 @@ const Container = styled(Block)`
 
 const ItemContainer = styled(Card)`
   box-shadow: 0px 0px 7px #a7c2cc;
+  padding: 8px;
   position: relative;
 `;
 
@@ -47,8 +48,6 @@ const DeleteIcon = styled(Clickable)`
   bottom: 5px;
 `;
 
-const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
-
 const ShipItem = ({ id, name, captain, avatar }) => {
   const [isModalOpen, toggleModal] = useToggle(false);
   const [, { removeShip }] = useGlobalState();
@@ -56,7 +55,7 @@ const ShipItem = ({ id, name, captain, avatar }) => {
   return (
     <ItemContainer mb={20}>
       <Flex>
-        <Avatar src={`${urlPrefix}/avatars/${avatar}.svg`} />
+        <Avatar src={avatar} />
         <Block p={2}>
           <div>
             <Text fontSize="1.2rem" fontWeight="bold">
@@ -93,18 +92,27 @@ const ShipItem = ({ id, name, captain, avatar }) => {
   );
 };
 
-const Sidebar = ({ ships, removeShip }) => {
-  const [state] = useGlobalState();
+const Sidebar = () => {
+  const [state, { createShip }] = useGlobalState();
+  const [{ loading }, makeReq] = useAsyncFn(createShip);
   return (
     <Container>
       <Logo src="/logo.png" />
-      <Button fullWidth onClick={() => null}>
+      <Button
+        fullWidth
+        loading={loading}
+        onClick={() => {
+          makeReq();
+        }}
+      >
         New Ship Route
       </Button>
       <p>Ships en route</p>
-      {state.activeShips.map(ship => (
-        <ShipItem key={ship.id} {...ship} />
-      ))}
+      <Block style={{ overflow: 'scroll' }} height="calc(90vh - 306px)">
+        {state.activeShips.map(ship => (
+          <ShipItem key={ship.id} {...ship} />
+        ))}
+      </Block>
     </Container>
   );
 };

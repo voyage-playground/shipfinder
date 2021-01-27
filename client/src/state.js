@@ -5,10 +5,13 @@ const TYPES = {
   SET_ACTIVE_SHIPS: 'SET_ACTIVE_SHIPS',
   UPDATE_SHIP: 'UPDATE_SHIP',
   REMOVE_SHIP: 'REMOVE_SHIP',
+  SELECT_SHIP: 'SELECT_SHIP',
+  CREATE_SHIP: 'CREATE_SHIP',
 };
 
 const initialState = {
   activeShips: [],
+  selectedShip: null,
 };
 
 const GlobalState = createContext([]);
@@ -31,6 +34,17 @@ const reducer = (state, { type, value }) => {
       return {
         ...state,
         activeShips: state.activeShips.filter(shi => shi.id !== value),
+      };
+    case TYPES.SELECT_SHIP:
+      return {
+        ...state,
+        selectedShip: state.activeShips.find(shi => shi.id === value),
+      };
+    case TYPES.CREATE_SHIP:
+      return {
+        ...state,
+        selectedShip: value,
+        activeShips: [...state.activeShips, value],
       };
     default:
       return state;
@@ -65,6 +79,13 @@ export const useGlobalState = () => {
     removeShip: async shipID => {
       await axios.delete(`/ships/${shipID}`);
       dispatch({ type: TYPES.REMOVE_SHIP, value: shipID });
+    },
+    selectShip: async shipID => {
+      dispatch({ type: TYPES.SELECT_SHIP, value: shipID });
+    },
+    createShip: async payload => {
+      const { data } = await axios.post('/ships', payload);
+      dispatch({ type: TYPES.CREATE_SHIP, value: data });
     },
   };
 
