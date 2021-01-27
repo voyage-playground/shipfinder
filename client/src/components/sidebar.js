@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block, Card, Text } from '@actovos-consulting-group/ui-core';
+import { Block, Card, Text, Button } from '@actovos-consulting-group/ui-core';
 import styled from 'styled-components';
 
 const Container = styled(Block)`
@@ -39,6 +39,9 @@ const Sidebar = ({ ships }) => {
   return (
     <Container>
       <Logo src="/logo.png" />
+      <Button fullWidth onClick={() => null}>
+        New Ship Route
+      </Button>
       <p>Ships en route</p>
       {ships.map(ship => (
         <ShipItem key={ship.id} {...ship} />

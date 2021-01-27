@@ -6,6 +6,7 @@ import { createGlobalStyle, css } from 'styled-components';
 import Map from './components/map';
 import Sidebar from './components/sidebar';
 import axios from './utils/axios';
+import theme from './theme';
 
 const GlobalStyle = createGlobalStyle(
   () => css`
@@ -57,16 +58,20 @@ const App = () => {
     setShips(data);
   };
 
+  const updateShipData = async ship => {
+    setShips(allShips.map(shi => (shi.id === ship.id ? ship : shi)));
+  };
+
   useEffectOnce(() => {
     fetchShipData();
   });
 
   return (
-    <Provider>
+    <Provider theme={theme}>
       <GlobalStyle />
       <Flex height="100%" flex={1}>
         <Sidebar ships={allShips} />
-        <Map ships={allShips} />
+        <Map updateShipData={updateShipData} ships={allShips} />
       </Flex>
     </Provider>
   );
