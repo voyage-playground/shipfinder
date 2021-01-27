@@ -14,7 +14,7 @@ cd /app/server && knex migrate:latest
 echo "🚀 Migrations Complete"
 
 if [ -n "$RUNNING_IN_VOYAGE" ] || [ "$APP_ENV" == "ci" ]; then
-  cd /voyage/server && knex seed:run
+  cd /app/server && knex seed:run
 fi
 
 if [ "$APP_ENV" == "local" ]; then

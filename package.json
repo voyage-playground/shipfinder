@@ -15,8 +15,6 @@
   },
   "homepage": "https://github.com/voyage-playground/shipfinder#readme",
   "devDependencies": {
-    "@actovos-consulting-group/eslint-config-acg": "^1.2.0",
-    "@actovos-consulting-group/prettier-config": "^1.0.2",
     "eslint": "^7.18.0",
     "prettier": "^2.2.1"
   }

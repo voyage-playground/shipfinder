@@ -1,12 +1,16 @@
 import React from 'react';
+import { useEffectOnce } from 'react-use';
 import { Flex, Provider } from '@actovos-consulting-group/ui-core';
 import styledNormalize from 'styled-normalize';
 import { createGlobalStyle, css } from 'styled-components';
 import Map from './components/map';
 import Sidebar from './components/sidebar';
+import theme from './theme';
+import { StateProvider, useGlobalState } from './state';
+import SelectedShip from './components/selected-ship';
 
 const GlobalStyle = createGlobalStyle(
-  ({ theme }) => css`
+  () => css`
     ${styledNormalize}
 
     div#root {
@@ -17,17 +21,13 @@ const GlobalStyle = createGlobalStyle(
 
     html,
     body {
-      font-family: 'Maven Pro', sans-serif !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
       height: 100%;
-      background: ${theme.colors.base};
-      color: ${theme.colors.textColor} !important;
     }
     * {
       box-sizing: border-box;
-    }
-
-    a {
-      color: ${theme.colors.whiteSmoke};
     }
 
     h1 {
@@ -51,16 +51,31 @@ const GlobalStyle = createGlobalStyle(
   `,
 );
 
-function App() {
+const InnerApp = () => {
+  const [{ selectedShip }, { fetchShips }] = useGlobalState();
+
+  useEffectOnce(() => {
+    fetchShips();
+  });
+
   return (
-    <Provider>
-      <GlobalStyle />
-      <Flex height="100%" flex={1}>
-        <Sidebar />
-        <Map />
-      </Flex>
-    </Provider>
+    <Flex height="100%" flex={1}>
+      {selectedShip && <SelectedShip />}
+      <Sidebar />
+      <Map />
+    </Flex>
   );
-}
+};
+
+const App = () => {
+  return (
+    <StateProvider>
+      <Provider theme={theme}>
+        <GlobalStyle />
+        <InnerApp />
+      </Provider>
+    </StateProvider>
+  );
+};
 
 export default App;

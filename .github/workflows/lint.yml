@@ -1,0 +1,25 @@
+name: Code Quality
+on:
+  pull_request:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: bahmutov/npm-install@v1
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: server
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: client
+      - run: npm --prefix client run lint
+      - run: npm --prefix client run prettier
+      - run: npm --prefix server run lint
+      - run: npm --prefix server run prettier

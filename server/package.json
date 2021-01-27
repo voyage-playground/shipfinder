@@ -5,15 +5,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --check '**/*.{js,jsx,ts,tsx,md}'",
+    "lint": "eslint --ext '.js' .",
     "start": "nodemon -L --inspect=0.0.0.0 server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "faker": "^5.2.0",
     "knex": "^0.21.16",
     "pg": "^8.5.1"
   },
   "devDependencies": {
+    "@actovos-consulting-group/eslint-config-acg": "^1.2.0",
+    "@actovos-consulting-group/prettier-config": "^1.0.2",
     "nodemon": "^2.0.7"
   }
 }
