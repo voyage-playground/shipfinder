@@ -7,6 +7,7 @@ exports.up = async knex => {
     table.text('captain');
     table.float('lat');
     table.float('lng');
+    table.text('avatar');
     table.timestamps(false, true);
   });
 };

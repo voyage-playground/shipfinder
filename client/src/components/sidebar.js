@@ -1,6 +1,13 @@
 import React from 'react';
-import { Block, Card, Text, Button } from '@actovos-consulting-group/ui-core';
+import {
+  Block,
+  Card,
+  Text,
+  Button,
+  Flex,
+} from '@actovos-consulting-group/ui-core';
 import styled from 'styled-components';
+import Avatar from './avatar';
 
 const Container = styled(Block)`
   background-color: white;
@@ -13,8 +20,12 @@ const Container = styled(Block)`
   border-radius: 10px;
   height: 90vh;
   z-index: 1;
-  width: 400px;
+  width: 300px;
   box-shadow: 0px 0px 76px #217594;
+`;
+
+const ItemContainer = styled(Card)`
+  box-shadow: 0px 0px 7px #a7c2cc;
 `;
 
 const Logo = styled.img`
@@ -22,16 +33,25 @@ const Logo = styled.img`
   display: block;
 `;
 
-const ShipItem = ({ name, captain }) => {
+const urlPrefix = process.env.REACT_APP_API_URL || window.location.origin;
+
+const ShipItem = ({ name, captain, avatar }) => {
   return (
-    <Card mb={20}>
-      <div>
-        <Text fontSize="1.2rem">{name}</Text>
-      </div>
-      <div>
-        <Text>Captain: {captain}</Text>
-      </div>
-    </Card>
+    <ItemContainer mb={20}>
+      <Flex>
+        <Avatar src={`${urlPrefix}/avatars/${avatar}.svg`} />
+        <Block p={2}>
+          <div>
+            <Text fontSize="1.2rem" fontWeight="bold">
+              {name}
+            </Text>
+          </div>
+          <div>
+            <Text>Captain: {captain}</Text>
+          </div>
+        </Block>
+      </Flex>
+    </ItemContainer>
   );
 };
 

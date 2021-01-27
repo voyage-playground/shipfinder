@@ -59,7 +59,10 @@ const App = () => {
   };
 
   const updateShipData = async ship => {
-    setShips(allShips.map(shi => (shi.id === ship.id ? ship : shi)));
+    setShips(
+      allShips.map(shi => (shi.id === ship.id ? { ...shi, ...ship } : shi)),
+    );
+    await axios.put(`/ships/${ship.id}`, ship);
   };
 
   useEffectOnce(() => {
