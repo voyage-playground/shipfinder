@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/voyage-playground/shipfinder"><img src="./logo.png" width="200" alt="Logo"></a>
+  <a href="https://github.com/voyage-playground/shipfinder"><img src="./client/public/logo.png" width="200" alt="Logo"></a>
 </p>
 
 <p align="center">
@@ -14,3 +14,7 @@
 ## Setup
 
 `npm i` inside root, client, and server directories
+
+`docker-compose up` in the root of repo
+
+`npm start` inside the client directory
