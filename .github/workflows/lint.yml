@@ -19,5 +19,7 @@ jobs:
       - uses: bahmutov/npm-install@v1
         with:
           working-directory: client
-      - run: npm run lint
-      - run: npm run prettier
+      - run: npm --prefix client run lint
+      - run: npm --prefix client run prettier
+      - run: npm --prefix server run lint
+      - run: npm --prefix server run prettier
