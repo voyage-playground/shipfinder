@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffectOnce } from 'react-use';
-import { Flex, Provider } from '@actovos-consulting-group/ui-core';
+import { Flex, Provider, Block } from '@actovos-consulting-group/ui-core';
 import styledNormalize from 'styled-normalize';
 import { createGlobalStyle, css } from 'styled-components';
 import Map from './components/map';
@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle(
 
     div#root {
       height: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -25,6 +26,7 @@ const GlobalStyle = createGlobalStyle(
         'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
         'Helvetica Neue', sans-serif;
       height: 100%;
+      width: 100%;
     }
     * {
       box-sizing: border-box;
@@ -60,9 +62,13 @@ const InnerApp = () => {
 
   return (
     <Flex height="100%" flex={1}>
-      {selectedShip && <SelectedShip />}
       <Sidebar />
-      <Map />
+      <Block position="relative" height="100vh" overflow="hidden">
+        {selectedShip && <SelectedShip />}
+        <Block>
+          <Map />
+        </Block>
+      </Block>
     </Flex>
   );
 };
