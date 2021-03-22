@@ -14,12 +14,12 @@ const ShipMap = () => {
 
   return (
     <ReactMapGL
+      {...viewport}
       mapboxApiAccessToken="pk.eyJ1IjoiamFkZW5sZW1tb24iLCJhIjoiY2swaHF6OGhhMDVoczNtcXJ1eWJhNzljMCJ9.rh0Da7Ct2szjyDfqW5MyTg"
       mapStyle="mapbox://styles/jadenlemmon/ckkemiib9132217p6jt5j5x1c"
       width="100vw"
       height="100vh"
       onViewportChange={vi => setViewport(vi)}
-      {...viewport}
     >
       {state.activeShips.map(ship => (
         <ShipMarker key={ship.id} {...ship} />
