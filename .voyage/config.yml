@@ -1,6 +1,6 @@
 services:
   app:
-    build: ./
+    context: ./
     primary: true
     exposePort: 3000
     environment:
