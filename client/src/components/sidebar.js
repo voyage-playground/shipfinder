@@ -117,9 +117,9 @@ const Sidebar = () => {
           <GoPlus color="white" size={20} />
         </Block>
       </Button>
-      <Block borderBottom="1px solid gray" height="0px" mt={3} mb={2} />
       <Text
         textAlign={{ _: 'center', xs: 'left' }}
+        mt={3}
         mb={2}
         fontSize={{ _: '0.9rem', xs: '1rem' }}
       >
@@ -129,8 +129,8 @@ const Sidebar = () => {
         overflow="auto"
         height={{
           _: 'calc(100vh - 200px)',
-          xs: 'calc(100vh - 410px)',
-          md: 'calc(90vh - 395px)',
+          xs: 'calc(100vh - 400px)',
+          md: 'calc(90vh - 380px)',
         }}
       >
         {state.activeShips.map(ship => (
