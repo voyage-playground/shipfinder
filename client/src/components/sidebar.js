@@ -117,8 +117,22 @@ const Sidebar = () => {
           <GoPlus color="white" size={20} />
         </Block>
       </Button>
-      <p>Active Ships</p>
-      <Block style={{ overflow: 'scroll' }} height="calc(90vh - 306px)">
+      <Text
+        textAlign={{ _: 'center', xs: 'left' }}
+        mt={3}
+        mb={2}
+        fontSize={{ _: '0.9rem', xs: '1rem' }}
+      >
+        Active Ships
+      </Text>
+      <Block
+        overflow="auto"
+        height={{
+          _: 'calc(100vh - 200px)',
+          xs: 'calc(100vh - 400px)',
+          md: 'calc(90vh - 380px)',
+        }}
+      >
         {state.activeShips.map(ship => (
           <ShipItem key={ship.id} {...ship} />
         ))}
