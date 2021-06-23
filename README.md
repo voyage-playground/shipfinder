@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-   A Voyage example application. Monitor your fleet of ships locations.
+   A Voyage example app. Monitor your fleet of ships locations.
 </p>
 
 <p align="center">
