@@ -1,5 +1,5 @@
 const colors = {
-  primary: '#0080ff',
+  primary: '#037af1',
 };
 
 const theme = {
