@@ -5,13 +5,14 @@ WORKDIR /app
 COPY client/package*.json client/
 RUN cd client && npm ci
 COPY client/ client/
-RUN cd client && npm run build
 
 COPY server/package*.json server/
 RUN cd server && npm ci
 COPY server/ server/
 
 RUN npm i -g knex
+
+RUN cd client && npm run build
 
 EXPOSE 8000
 
